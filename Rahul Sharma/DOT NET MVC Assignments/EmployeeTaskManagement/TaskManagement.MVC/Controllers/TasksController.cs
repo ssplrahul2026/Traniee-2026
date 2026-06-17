@@ -37,7 +37,7 @@ namespace TaskManagement.MVC.Controllers
 
             return View(tasks ?? new List<TaskResponseViewModel>());
         }
-
+        
         public async Task<IActionResult> Details(int id)
         {
             var authCheck = AllowOnly("Admin", "Manager", "Employee");
