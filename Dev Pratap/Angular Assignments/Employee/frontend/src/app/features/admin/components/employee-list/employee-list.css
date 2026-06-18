@@ -1,0 +1,408 @@
+.directory-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+/* Container deck for the button segments */
+.select-button-group {
+  display: flex;
+  background-color: #2d2d2d;
+  border: 1px solid #3d3d3d;
+  border-radius: 6px;
+  padding: 4px;
+  gap: 4px;
+}
+
+/* Styling for non-editable key fields */
+.input-disabled {
+  background-color: #1a1a1a !important;
+  color: #777777 !important;
+  border-color: #2a2a2a !important;
+  cursor: not-allowed;
+}
+
+.font-mono {
+  font-family: monospace;
+}
+
+/* Toggle card wrap deck container */
+.toggle-card-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #2d2d2d;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #3d3d3d;
+  margin-top: 6px;
+}
+
+.section-label {
+  font-weight: 600;
+  color: #aaaaaa;
+}
+
+/* Individual toggle row layouts */
+.toggle-switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.toggle-switch-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.toggle-label-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-label-text .title {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.toggle-label-text .description {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 11px;
+}
+
+/* Hardware standard switch frame */
+.hardware-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.hardware-switch input {
+  opacity: 0; width: 0; height: 0;
+}
+
+.hardware-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #444444;
+  transition: 0.2s ease-in-out;
+  border-radius: 34px;
+}
+
+.hardware-slider::before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  transition: 0.2s ease-in-out;
+  border-radius: 50%;
+}
+
+input:checked + .hardware-slider {
+  background-color: #bb86fc;
+}
+
+input:checked + .hardware-slider::before {
+  transform: translateX(22px);
+  background-color: #121212;
+}
+
+/* Account Active Checkbox Style Row Mapping */
+.checkbox-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #e0e0e0;
+  font-size: 14px;
+  user-select: none;
+}
+
+.checkbox-label-row input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0; width: 0;
+}
+
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #666666;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+input:checked ~ .custom-checkbox {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+}
+
+input:checked ~ .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #121212;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+/* Individual segment item default state */
+.select-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #aaaaaa;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Hover highlights */
+.select-btn:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+/* Selected active state */
+.select-btn.active {
+  background-color: #bb86fc;
+  color: #121212;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Directory Header Layout */
+.directory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.directory-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 15px;
+}
+
+.btn-add {
+  background-color: #bb86fc;
+  color: #121212;
+  border: none;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: #9a66da;
+}
+
+/* CRUD Data Directory Table Design */
+.table-container-scroll {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #3d3d3d;
+}
+
+.directory-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 15px;
+}
+
+.directory-table th, 
+.directory-table td {
+  padding: 18px 24px;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.directory-table th {
+  background-color: rgba(255, 255, 255, 0.02);
+  color: #aaaaaa;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+}
+
+.emp-name { font-weight: 600; color: #ffffff; }
+.emp-email { color: #aaaaaa; }
+.text-right { text-align: right; }
+
+.dept-label {
+  background-color: #2d2d2d;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* System Access Tags */
+.role-indicator {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.role-indicator.admin { color: #bb86fc; }
+.role-indicator.manager { color: #4fc3f7; }
+.role-indicator.employee { color: #cccccc; }
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.status-indicator::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.status-indicator.active::before { background-color: #81c784; }
+.status-indicator.on-leave::before { background-color: #ffb74d; }
+.status-indicator.terminated::before { background-color: #cf6679; }
+
+/* CRUD Trigger Action Controls */
+.actions-cell {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.crud-btn {
+  background: transparent;
+  border: 1px solid #3d3d3d;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+.crud-btn.edit:hover { background-color: rgba(79, 195, 247, 0.1); border-color: #4fc3f7; color: #4fc3f7; }
+.crud-btn.delete:hover { background-color: rgba(207, 102, 121, 0.1); border-color: #cf6679; color: #cf6679; }
+
+.empty-state {
+  text-align: center;
+  padding: 64px !important;
+  color: #aaaaaa;
+}
+
+/* ---- OPERATIONAL DIALOG MODAL LAYOUTS ---- */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  backdrop-filter: blur(5px);
+  padding: 20px;
+}
+
+.modal-wrapper {
+  background-color: #1e1e1e;
+  border: 1px solid #3d3d3d;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+  animation: modalEnter 0.20s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.modal-head h2 { margin: 0; font-size: 22px; }
+.close-btn {
+  background: transparent; border: none; color: #aaa;
+  font-size: 32px; cursor: pointer; line-height: 0.5;
+}
+.close-btn:hover { color: #fff; }
+
+/* Structural Content Forms Form Components */
+.form-group { margin-bottom: 20px; }
+.split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+label { display: block; margin-bottom: 8px; font-size: 13px; color: #aaaaaa; font-weight: 500; }
+input[type="text"], input[type="email"], select {
+  width: 100%; padding: 12px; border-radius: 6px;
+  border: 1px solid #3d3d3d; background-color: #2d2d2d;
+  color: white; box-sizing: border-box; font-size: 15px;
+}
+input:focus, select:focus { outline: none; border-color: #bb86fc; }
+
+.modal-foot-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.btn-cancel {
+  background: transparent; color: #ffffff; border: 1px solid #3d3d3d;
+  padding: 12px 22px; border-radius: 6px; cursor: pointer; font-weight: 600;
+}
+.btn-cancel:hover { background: rgba(255,255,255,0.04); }
+
+.btn-submit {
+  background-color: #bb86fc; color: #121212; border: none;
+  padding: 12px 26px; border-radius: 6px; cursor: pointer; font-weight: 600;
+}
+.btn-submit:hover:not(:disabled) { background-color: #9a66da; }
+.btn-submit:disabled { background-color: #333; color: #666; cursor: not-allowed; }
+
+.input-error { border-color: #cf6679 !important; }
+.error-msg { color: #cf6679; margin-top: 6px; font-size: 12px; }
+
+@keyframes modalEnter {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

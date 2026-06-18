@@ -1,0 +1,69 @@
+<div class="task-page">
+  
+  <header class="page-header">
+    <div>
+      <h1>Operational Assignment Registry</h1>
+      <p class="subtitle">Full overview of system objectives without distracting interface overlays</p>
+    </div>
+    <button class="btn-primary-action" (click)="navigateToCreate()">
+      Create New Objective
+    </button>
+  </header>
+
+  <div class="registry-wrapper">
+    <table class="registry-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Task Parameters</th>
+          <th>Target Allocations (To / By)</th>
+          <th>Timeline Bounds</th>
+          <th>Status Matrix</th>
+          <th class="text-right">Navigation Triggers</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (task of adminService.task(); track task.taskId) {
+          <tr>
+            <td class="id-cell">#{{ task.taskId }}</td>
+            <td class="info-cell">
+              <span class="task-title">{{ task.title }}</span>
+              <p class="task-desc" [title]="task.description">{{ task.description }}</p>
+            </td>
+            <td>
+              <div class="assignment-stack">
+                <span><strong>Assignee :</strong> {{ task.Assignee.FullName }}</span>
+                <span><strong>Creator :</strong> {{ task.Creator.FullName }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="date-stack">
+                <span class="due-tag"><strong>Due:</strong> {{ task.dueDate | date:'mediumDate' }}</span>
+                <span class="meta-date">Updated: {{ task.updatedDate | date:'shortTime' }}</span>
+              </div>
+            </td>
+            <td>
+              <span class="status-badge {{ task.status.toLowerCase() }}">
+                {{ task.status }}
+              </span>
+            </td>
+            <td class="text-right actions-cell">
+              <button class="nav-btn watch" (click)="navigateToWatch(task.taskId)" title="View Full Page Context">👁️ Watch</button>
+              <button class="nav-btn edit" (click)="navigateToEdit(task.taskId)" title="Route to Editor Matrix">✏️ Edit</button>
+              @if(shareService.userDetails()?.role == "Admin"){
+                <button class="nav-btn delete" (click)="deleteTask(task.taskId)" title="Purge Task Document">🗑️ Delete</button>
+              }
+              
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state">
+              No task vectors discovered within current systemic memory slots.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

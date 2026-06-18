@@ -1,0 +1,129 @@
+.edit-page-container {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Header elements descriptions layout tags */
+.edit-page-header {
+  margin-bottom: 28px;
+}
+
+.btn-back-nav {
+  background: transparent; border: none;
+  color: #bb86fc; font-size: 14px; font-weight: 500;
+  cursor: pointer; padding: 0; margin-bottom: 12px;
+}
+.btn-back-nav:hover { text-decoration: underline; color: #9a66da; }
+
+.edit-page-header h1 {
+  margin: 0 0 6px 0; font-size: 26px; font-weight: 700; color: #ffffff;
+}
+
+.subtitle {
+  margin: 0; color: #aaaaaa; font-size: 13px;
+}
+
+/* Base Canvas Input Cards Panel */
+.edit-form-card {
+  background-color: #1e1e1e;
+  border: 1px solid #3d3d3d;
+  border-radius: 12px;
+  padding: 36px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-control-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-control-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+label {
+  display: block; margin-bottom: 8px; font-size: 13px; color: #aaaaaa; font-weight: 500;
+}
+
+input[type="text"], textarea, select {
+  width: 100%; padding: 12px 14px; border-radius: 6px;
+  border: 1px solid #3d3d3d; background-color: #2d2d2d;
+  color: #ffffff; box-sizing: border-box; font-size: 14px; font-family: inherit;
+}
+input:focus, textarea:focus, select:focus { outline: none; border-color: #bb86fc; }
+
+/* Integrated Calendar Component Interfacing UI elements */
+.calendar-input-field {
+  position: relative; display: flex; align-items: center;
+}
+
+.calendar-input-field input[type="date"] {
+  width: 100%; padding: 11px 40px 11px 14px; border-radius: 6px;
+  border: 1px solid #3d3d3d; background-color: #2d2d2d;
+  color: #ffffff; font-size: 14px; font-family: inherit;
+}
+
+input[type="date"] {
+  color-scheme: dark; /* Forces default native popup dialog calendar element into dark mode system values */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  width: auto; height: auto; background: transparent; color: transparent; cursor: pointer;
+}
+
+.calendar-decoration {
+  position: absolute; right: 14px; pointer-events: none; font-size: 14px;
+}
+
+/* Status Segment Box Selection Deck Layout framework codes */
+.status-segment-group {
+  display: flex; background-color: #2d2d2d;
+  border: 1px solid #3d3d3d; border-radius: 6px; padding: 4px; gap: 4px; max-width: 440px;
+}
+
+.segment-pill {
+  flex: 1; background: transparent; border: none; color: #888888;
+  padding: 10px; font-size: 13px; font-weight: 500; border-radius: 4px;
+  cursor: pointer; transition: all 0.15s ease; text-align: center;
+}
+.segment-pill:hover:not(.active) { color: #ffffff; background-color: rgba(255,255,255,0.02); }
+.segment-pill.active { background-color: #bb86fc; color: #121212; font-weight: 600; }
+
+.form-divider-line {
+  border-top: 1px solid #3d3d3d; margin: 32px 0 24px 0;
+}
+
+/* Action Control Triggers Buttons Panels */
+.edit-action-footer {
+  display: flex; justify-content: flex-end; gap: 12px;
+}
+
+.btn-cancel-action {
+  background: transparent; color: #ffffff; border: 1px solid #3d3d3d;
+  padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;
+}
+.btn-cancel-action:hover { background-color: rgba(255,255,255,0.02); }
+
+.btn-commit-action {
+  background-color: #bb86fc; color: #121212; border: none;
+  padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;
+  transition: background-color 0.15s ease;
+}
+.btn-commit-action:hover:not(:disabled) { background-color: #9a66da; }
+.btn-commit-action:disabled { background-color: #2d2d2d; color: #666666; cursor: not-allowed; border: 1px solid #3d3d3d; }
+
+/* Structural state errors notifications signals formatting text lines */
+.input-error { border-color: #cf6679 !important; }
+.validation-error-text { color: #cf6679; font-size: 12px; margin-top: 6px; }
+
+.edit-loading-panel {
+  background-color: #1e1e1e; border: 1px solid #3d3d3d; border-radius: 12px;
+  padding: 60px; text-align: center; color: #aaaaaa; font-size: 14px;
+}

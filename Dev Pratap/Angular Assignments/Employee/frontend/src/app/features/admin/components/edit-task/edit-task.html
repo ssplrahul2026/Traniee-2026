@@ -1,0 +1,100 @@
+<div class="edit-page-container">
+  
+  <header class="edit-page-header">
+    <button class="btn-back-nav" (click)="cancelAndReturn()">← Abort Modifications</button>
+    <h1>Configuration Control Center</h1>
+    <p class="subtitle">Amending task matrix properties for record entry identifier index #{{ targetTaskId }}</p>
+  </header>
+
+  @if (isLoading()) {
+    <div class="edit-loading-panel">
+      <div class="spinner"></div>
+      <p>Mapping task attributes onto control fields...</p>
+    </div>
+  } @else {
+
+    <main class="edit-form-card">
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+          <label for="title">Task Title Field Directive</label>
+          <input 
+            type="text" 
+            id="title" 
+            formControlName="title" 
+            placeholder="e.g., Fix Database Locking Anomalies"
+            [class.input-error]="isFieldInvalid('title')"
+          >
+          @if (isFieldInvalid('title')) {
+            <div class="validation-error-text"><small>A task title is required (minimum 5 characters).</small></div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="description">Detailed Context Scope Specifications</label>
+          <textarea 
+            id="description" 
+            formControlName="description" 
+            rows="4"
+            placeholder="Trace and isolate blocking threads inside core databases indexes schemes..."
+            [class.input-error]="isFieldInvalid('description')"
+          ></textarea>
+          @if (isFieldInvalid('description')) {
+            <div class="validation-error-text"><small>A clear scope description parameters field mapping is required (minimum 10 characters).</small></div>
+          }
+        </div>
+
+        <div class="form-control-grid">
+          
+          <div class="form-group">
+            <label for="assignedToUserId">Assignee Personnel Allocation</label>
+            <select id="assignedToUserId" formControlName="assignedToUserId" [class.input-error]="isFieldInvalid('assignedToUserId')">
+              <option value="" disabled>Reallocate team assignment role...</option>
+              @for (emp of adminService.Employees(); track emp.userId) {
+                <option [value]="emp.userId">{{ emp.FullName }} &mdash; ({{ emp.email }})</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="dueDate">Target Completion Timeline (Due Date)</label>
+            <div class="calendar-input-field">
+              <input 
+                type="date" 
+                id="dueDate" 
+                formControlName="dueDate"
+                [class.input-error]="isFieldInvalid('dueDate')"
+              >
+              <span class="calendar-decoration">📅</span>
+            </div>
+            @if (isFieldInvalid('dueDate')) {
+              <div class="validation-error-text"><small>Timeline parameter dates are required.</small></div>
+            }
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label>Lifecycle Tracking Status State</label>
+          <div class="status-segment-group">
+            <button type="button" class="segment-pill" [class.active]="taskForm.get('status')?.value === 'Pending'"
+              (click)="taskForm.get('status')?.setValue('Pending')">Pending</button>
+            <button type="button" class="segment-pill" [class.active]="taskForm.get('status')?.value === 'In Progress'"
+              (click)="taskForm.get('status')?.setValue('In Progress')">In Progress</button>
+            <button type="button" class="segment-pill" [class.active]="taskForm.get('status')?.value === 'Completed'"
+              (click)="taskForm.get('status')?.setValue('Completed')">Completed</button>
+          </div>
+        </div>
+
+        <div class="form-divider-line"></div>
+
+        <div class="edit-action-footer">
+          <button type="button" class="btn-cancel-action" (click)="cancelAndReturn()">Dismiss Adjustments</button>
+          <button type="submit" class="btn-commit-action" [disabled]="taskForm.invalid">Commit Changes</button>
+        </div>
+
+      </form>
+    </main>
+
+  }
+</div>

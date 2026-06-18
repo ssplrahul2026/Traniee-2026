@@ -1,0 +1,158 @@
+.task-page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Page Banner */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 14px;
+}
+
+.btn-primary-action {
+  background-color: #bb86fc;
+  color: #121212;
+  border: none;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn-primary-action:hover { background-color: #9a66da; }
+
+/* Dashboard Registry Table Configuration */
+.registry-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #3d3d3d;
+}
+
+.registry-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.registry-table th, 
+.registry-table td {
+  padding: 18px 24px;
+  border-bottom: 1px solid #3d3d3d;
+  vertical-align: middle;
+}
+
+.registry-table th {
+  background-color: rgba(255, 255, 255, 0.02);
+  color: #aaaaaa;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+}
+
+.id-cell {
+  font-family: monospace;
+  color: #bb86fc;
+  font-weight: 600;
+}
+
+.info-cell {
+  max-width: 300px;
+}
+
+.task-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.task-desc {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Composite Data Stacks */
+.assignment-stack, .date-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+.assignment-stack span { color: #e0e0e0; }
+.meta-date { color: #666666; font-size: 11px; }
+.due-tag { color: #ffb74d; }
+
+/* Status Tokens */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+.status-badge.pending { background-color: #2d2d2d; color: #cccccc; }
+.status-badge.in-progress { background-color: rgba(79, 195, 247, 0.15); color: #4fc3f7; }
+.status-badge.completed { background-color: rgba(76, 175, 80, 0.15); color: #81c784; }
+
+/* Direct Route Button Action Layout Controls */
+.text-right { text-align: right; }
+.actions-cell {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.nav-btn {
+  background-color: #2a2a2a;
+  border: 1px solid #3d3d3d;
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-btn:hover { background-color: #333333; color: #ffffff; }
+.nav-btn.watch:hover { border-color: #81c784; color: #81c784; background-color: rgba(76, 175, 80, 0.05); }
+.nav-btn.edit:hover { border-color: #4fc3f7; color: #4fc3f7; background-color: rgba(79, 195, 247, 0.05); }
+.nav-btn.delete:hover { border-color: #cf6679; color: #cf6679; background-color: rgba(207, 102, 121, 0.05); }
+
+.empty-state {
+  text-align: center;
+  color: #777777;
+  padding: 54px !important;
+  font-style: italic;
+}

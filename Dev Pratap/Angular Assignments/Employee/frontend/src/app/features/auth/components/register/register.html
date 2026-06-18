@@ -1,0 +1,98 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Create Account</h2>
+    <p class="subtitle">Join us today! It only takes a minute.</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      
+      
+
+      <div class="form-group">
+        <label for="fullname">Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="fullName" 
+          placeholder="john doe"
+          [class.input-error]="isFieldInvalid('fullName')"
+        >
+        @if (isFieldInvalid('name')) {
+          <div class="error-container">
+            @if (registerForm.get('name')?.errors?.['required']) {
+              <small>Username is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="name@example.com"
+          [class.input-error]="isFieldInvalid('email')"
+        >
+        @if (isFieldInvalid('email')) {
+          <div class="error-container">
+            @if (registerForm.get('email')?.errors?.['required']) {
+              <small>Email address is required.</small>
+            }
+            @if (registerForm.get('email')?.errors?.['email']) {
+              <small>Please enter a valid email address.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="••••••••"
+          [class.input-error]="isFieldInvalid('password')"
+        >
+        @if (isFieldInvalid('password')) {
+          <div class="error-container">
+            @if (registerForm.get('password')?.errors?.['required']) {
+              <small>Password is required.</small>
+            }
+            @if (registerForm.get('password')?.errors?.['minlength']) {
+              <small>Password must be at least 6 characters long.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          placeholder="••••••••"
+          [class.input-error]="isFieldInvalid('confirmPassword')"
+        >
+        @if (isFieldInvalid('confirmPassword')) {
+          <div class="error-container">
+            @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+              <small>Please confirm your password.</small>
+            }
+            @if (registerForm.get('confirmPassword')?.errors?.['passwordMismatch']) {
+              <small>Passwords do not match.</small>
+            }
+          </div>
+        }
+      </div>
+
+      
+
+      <button type="submit" class="btn-primary" [disabled]="registerForm.invalid">Register</button>
+    </form>
+
+    <p class="switch-auth">Already have an account? <a routerLink="/auth/login">Sign In</a></p>
+  </div>
+</div>

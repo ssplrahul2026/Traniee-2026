@@ -1,0 +1,54 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Please sign in to your account</p>
+
+    <form [formGroup]="loginData" >
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="name@example.com"
+          [class.input-error]="loginData.get('email')?.touched && loginData.get('email')?.invalid"
+        >
+        
+        @if (loginData.get('email')?.touched) {
+          <div class="error-msg">
+            @if (loginData.get('email')?.errors?.['required']) {
+              <small>Email is required.</small>
+            } @else if (loginData.get('email')?.errors?.['email']) {
+              <small>Please enter a valid email address.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="••••••••"
+          [class.input-error]="loginData.get('password')?.touched && loginData.get('password')?.invalid"
+        >
+        
+        @if (loginData.get('password')?.touched && loginData.get('password')?.invalid) {
+          <div class="error-msg">
+            <small>Password must be at least 6 characters long.</small>
+          </div>
+        }
+      </div>
+
+      <div class="form-actions">
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loginData.invalid" (click)="onLogin()">Sign In</button>
+    </form>
+
+    <p class="switch-auth">Don't have an account? <a routerLink="/auth/register">Register</a></p>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="dashboard-container">
+
+    <!-- Shared Welcome Banner -->
+    <header class="welcome-banner">
+        <div class="banner-text">
+            <h1>{{ currentTimeGreeting }}, {{ shareService.userDetails()?.fullName| uppercase}} !</h1>
+            <p>Dashboard &mdash; Logged in as <span class="role-badge">{{
+                    shareService.userDetails()?.role
+                    }}</span></p>
+        </div>
+        <div class="banner-meta" (click)="logOut()">
+            <span class="dept-tag"> logOut</span>
+        </div>
+    </header>
+
+    <!-- Contextual Notification Box based on Role -->
+
+
+    <div class="dashboard-split">
+        @if(shareService.userDetails()?.role == "Admin" || shareService.userDetails()?.role == "Manager"){
+        <section class="panel flex-panel">
+            <h3>{{shareService.userDetails()?.role}} Actions</h3>
+            <div class="actions-grid">
+                <button class="action-btn" routerLink="/admin/taskList">
+                    <span class="btn-icon">📄</span> Task List
+                </button>
+                <button class="action-btn" routerLink="/admin/createTask">
+                    <span class="btn-icon">🗓️</span> Create New Task
+                </button>
+                @if(shareService.userDetails()?.role == "Admin"){
+                    <button class="action-btn" routerLink="/admin/Employees">
+                    <span class="btn-icon">⚙️</span> Employees
+                </button>
+                }
+                
+                <button class="action-btn technical-btn"
+                    *ngIf="currentUser.role === 'Admin' || currentUser.role === 'Manager'">
+                    <span class="btn-icon">📊</span> Export System Metrics
+                </button>
+            </div>
+        </section>
+        }
+
+
+        <!-- Action Panel (Shared hub but optimized via standard button flows) -->
+
+        <section class="panel">
+            <h3>My Tasks</h3>
+            <div class="activity-timeline">
+                <div class="todo-list-deck">
+                    @for (item of shareService.todos(); track item.taskId) {
+
+                    <div class="todo-card" [class.done]="item.status === 'Completed'">
+
+                        <div class="todo-body">
+                            <div class="badge-row">
+                                <span class="task-id">#{{ item.taskId }}</span>
+                                <span class="status-indicator {{ item.status.toLowerCase().replace(' ', '-') }}">
+                                    {{ item.status }}
+                                </span>
+                            </div>
+
+                            <h3 class="todo-title">{{ item.title }}</h3>
+                            <p class="todo-description">{{ item.description }}</p>
+
+                            <div class="todo-footer-meta">
+                                <span>📅 <strong>Due:</strong> {{ item.dueDate | date:'mediumDate' }}</span>
+                                <span>👤 <strong>By:</strong> {{ item.Creator.FullName }}</span>
+                            </div>
+                        </div>
+
+                        <div class="todo-actions">
+                            @if (item.status !== 'Completed') {
+                            <button class="btn-complete-trigger" (click)="markAs(item,'Completed')">
+                                 Mark Done
+                            </button>
+                            }@if(item.status !== 'In Progress') {
+                            <button class="btn-complete-trigger" (click)="markAs(item,'In Progress')">
+                                 Mark In-Progress
+                            </button>
+                            } @if(item.status !== 'Pending') {
+                            <button class="btn-complete-trigger" (click)="markAs(item,'Pending')">
+                                 Mark Pending
+                            </button>
+                            } 
+                        </div>
+
+                    </div>
+
+                    } @empty {
+                    <div class="empty-backlog-panel">
+                        <h3>Queue Fully Cleared</h3>
+                        <p>No active directives are currently waiting for execution steps within your account.</p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <!-- Recent Corporate Activities feed -->
+
+
+    </div>
+
+</div>

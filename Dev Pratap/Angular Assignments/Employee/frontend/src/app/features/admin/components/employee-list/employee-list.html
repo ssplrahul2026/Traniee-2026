@@ -1,0 +1,145 @@
+<div class="directory-container">
+
+  <header class="directory-header">
+    <div>
+      <h1>Employee Directory</h1>
+      <p class="subtitle">Maintain system user profiles, permissions, and occupational access tiers</p>
+    </div>
+    <button class="btn-add" routerLink="/dashboard">
+      <span class="icon">Go</span> To Dashboard
+    </button>
+  </header>
+
+  <div class="table-container-scroll">
+    <table class="directory-table">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email Address</th>
+          <th>Status</th>
+          <th>Role</th>
+          <th class="text-right">Management Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of adminService.Employees(); track employee.userId) {
+        <tr>
+          <td class="emp-name">{{ employee.FullName }}</td>
+          <td class="emp-email">{{ employee.email }}</td>
+          <td><span class="dept-label">{{ employee.isActive }}</span></td>
+          <td>
+            @for (role of employee.Roles; track $index) {
+            <span class="role-indicator {{ role.roleName.toLowerCase() }}">
+              {{ role.roleName }}
+            </span>
+            }
+
+          </td>
+
+          <td class="text-right actions-cell">
+            <button class="crud-btn edit" (click)="openEditModal(employee)" title="Update Profile">✏️ Edit</button>
+            @if(employee.Roles[0].roleName != "Admin"){
+            <button class="crud-btn delete" (click)="deleteEmployee(employee.userId)" title="Remove Record">🗑️
+              Delete</button>
+            }
+
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="6" class="empty-state">
+            No personnel profiles found within the active database sequence.
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (isModalOpen) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-wrapper" (click)="$event.stopPropagation()">
+      <div class="modal-head">
+        <h2>{{ isEditing ? 'Update Employee Record' : 'Enroll New Employee' }}</h2>
+        <button class="close-btn" (click)="closeModal()">&times;</button>
+      </div>
+
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+        @if (isEditing) {
+        <div class="form-group font-mono">
+          <label>Internal User Identifier (ID)</label>
+          <input type="text" formControlName="userId" readonly class="input-disabled">
+        </div>
+        }
+
+        <div class="form-group">
+          <label for="name">Legal Full Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="e.g., Jane Margaret Watson"
+            [class.input-error]="isFieldInvalid('name')">
+          @if (isFieldInvalid('name')) {
+          <div class="error-msg">
+            <small>Valid name parameters are required (min 3 characters).</small>
+          </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="email">Corporate Email Address</label>
+          <input type="email" id="email" formControlName="email" placeholder="jane.w@company.com"
+            [class.input-error]="isFieldInvalid('email')">
+          @if (isFieldInvalid('email')) {
+          <div class="error-msg">
+            <small>A proper company syntax email mapping is required.</small>
+          </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label-row">
+            <input type="checkbox" formControlName="isActive">
+            <span class="custom-checkbox"></span>
+            <span>Account Profile Status is Active</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="section-label">System Access Privileges</label>
+          <div class="toggle-card-deck">
+
+            <label class="toggle-switch-row">
+              <div class="toggle-label-text">
+                <span class="title">Admin Authority</span>
+                <p class="description">Allows full workspace structural parameter modifications.</p>
+              </div>
+              <div class="hardware-switch">
+                <input type="checkbox" formControlName="isAdmin">
+                <span class="hardware-slider"></span>
+              </div>
+            </label>
+
+            <label class="toggle-switch-row">
+              <div class="toggle-label-text">
+                <span class="title">Manager Authority</span>
+                <p class="description">Allows assignment delegation and project tracking lookups.</p>
+              </div>
+              <div class="hardware-switch">
+                <input type="checkbox" formControlName="isManager">
+                <span class="hardware-slider"></span>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <div class="modal-foot-actions">
+          <button type="button" class="btn-cancel" (click)="closeModal()">Dismiss</button>
+          <button type="submit" class="btn-submit" [disabled]="employeeForm.invalid">
+            {{ isEditing ? 'Commit Changes' : 'Register Profile' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  }
+</div>

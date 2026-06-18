@@ -1,0 +1,93 @@
+<div class="view-task-container">
+  
+  <header class="view-header-bar">
+    <button class="btn-nav-back" (click)="goBack()">
+      ← Back to List
+    </button>
+  </header>
+
+  @if (isLoading()) {
+    <div class="status-card-panel central">
+      <div class="loading-spinner"></div>
+      <p>Fetching specific operational data matrix elements...</p>
+    </div>
+  } 
+  
+  @else if (!task()) {
+    <div class="status-card-panel error">
+      <h3>Missing Object Frame Instance</h3>
+      <p>The requested task ID parameters cannot be associated with any active database documents.</p>
+      <button class="btn-action-back" (click)="goBack()">Return to Directory</button>
+    </div>
+  } 
+  
+  @else {
+    <div class="profile-split-view">
+      
+      <main class="profile-primary-card">
+        <div class="meta-row">
+          <span class="index-badge">Task Document ID: #{{ task()?.taskId }}</span>
+          <span class="status-badge {{ task()?.status?.toLowerCase() }}">
+            {{ task()?.status }}
+          </span>
+        </div>
+
+        <h1 class="task-headline">{{ task()?.title }}</h1>
+        
+        <div class="section-divider"></div>
+
+        <div class="content-body-block">
+          <h3>Detailed Directive Specifications</h3>
+          <p class="description-text">{{ task()?.description }}</p>
+        </div>
+      </main>
+
+      <aside class="profile-sidebar-stack">
+        
+        <div class="sidebar-widget">
+          <h4>Execution Deadlines</h4>
+          <div class="meta-data-row">
+            <span class="title-label">Target Completion:</span>
+            <span class="value-text urgent">{{ task()?.dueDate | date:'longDate' }}</span>
+          </div>
+          <div class="meta-data-row secondary">
+            <span class="title-label">System Initialized:</span>
+            <span class="value-text">{{ task()?.createdDate | date:'medium' }}</span>
+          </div>
+          @if (task()?.updatedDate) {
+            <div class="meta-data-row secondary">
+              <span class="title-label">Last Synchronization:</span>
+              <span class="value-text">{{ task()?.updatedDate | date:'medium' }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="sidebar-widget user-widget">
+          <h4>Allocated Professional</h4>
+          <div class="user-profile-tile">
+            <div class="profile-avatar assignee">👤</div>
+            <div class="profile-info-block">
+              <span class="full-name">{{ task()?.Assignee?.FullName }}</span>
+              <span class="email-address">{{ task()?.Assignee?.email }}</span>
+              <span class="system-uid font-mono">UID Reference: {{ task()?.Assignee?.userId }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget user-widget">
+          <h4>Origin Creator Authority</h4>
+          <div class="user-profile-tile">
+            <div class="profile-avatar creator">⚙️</div>
+            <div class="profile-info-block">
+              <span class="full-name">{{ task()?.Creator?.FullName }}</span>
+              <span class="email-address">{{ task()?.Creator?.email }}</span>
+              <span class="system-uid font-mono">UID Reference: {{ task()?.Creator?.userId }}</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  }
+</div>
